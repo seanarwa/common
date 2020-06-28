@@ -1,0 +1,4 @@
+logging:
+    append: true
+    level: debug
+    file: log/main.log
