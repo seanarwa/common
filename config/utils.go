@@ -28,5 +28,5 @@ func prettyPrint(config map[string]interface{}) {
 	if err != nil {
 		log.Fatal("Error occured when trying to pretty print config: ", err)
 	}
-	log.Debug(" " + string(b))
+	log.Trace(" " + string(b))
 }

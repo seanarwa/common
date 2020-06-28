@@ -12,6 +12,6 @@ func startWatching() {
 }
 
 func onConfigChangeEvent(event fsnotify.Event) {
-	log.Debug("Config change detected: ", event.Name)
+	log.Debug("Config change detected: \"", event.Name, "\"")
 	LoadAll()
 }

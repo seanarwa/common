@@ -17,6 +17,7 @@ var allowedLevels = map[string]logrus.Level{
 	"warn":  logrus.WarnLevel,
 	"info":  logrus.InfoLevel,
 	"debug": logrus.DebugLevel,
+	"trace": logrus.TraceLevel,
 }
 
 func Init(file string, level string, append bool) {

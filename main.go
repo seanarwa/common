@@ -8,15 +8,15 @@ import (
 
 func main() {
 
-	help_flag, log_config_file, config_file := config.ParseArgs()
+	helpFlag, logConfigFile, configFile := config.ParseArgs()
 
-	if help_flag {
+	if helpFlag {
 		config.PrintUsage()
 		os.Exit(0)
 	}
 
-	config.Set("cmd.log_config_file", log_config_file)
-	config.Set("cmd.config_file", config_file)
+	config.Set("cmd.log_config_file", logConfigFile)
+	config.Set("cmd.config_file", configFile)
 	config.Init()
 
 	for {

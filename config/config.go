@@ -1,9 +1,9 @@
 package config
 
 import (
+	"github.com/seanarwa/ds/logging"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"seanchang.me/common/logging"
 )
 
 func Init() {
@@ -54,27 +54,48 @@ func loadLogging(configFile string) {
 }
 
 func Get(key string) interface{} {
+	safeCheck(key)
 	return viper.Get(key)
 }
 
 func GetString(key string) string {
-	return Get(key).(string)
+	safeCheck(key)
+	return viper.GetString(key)
 }
 
 func GetBool(key string) bool {
-	return Get(key).(bool)
+	safeCheck(key)
+	return viper.GetBool(key)
 }
 
 func GetInt(key string) int {
-	return Get(key).(int)
+	safeCheck(key)
+	return viper.GetInt(key)
 }
 
 func GetFloat64(key string) float64 {
-	return Get(key).(float64)
+	safeCheck(key)
+	return viper.GetFloat64(key)
 }
 
 func Set(key string, value interface{}) {
 	viper.Set(key, value)
+}
+
+func Exists(key string) bool {
+	return viper.IsSet(key)
+}
+
+func safeCheck(key string) {
+	if !Exists(key) {
+		log.WithFields(log.Fields{
+			"key": key,
+		}).Fatal("Error occured when trying to get key from config: key does not exists")
+	} else {
+		log.WithFields(log.Fields{
+			"key": key,
+		}).Trace("Config key safe check ok")
+	}
 }
 
 func addConfig(filepath string) (err error) {
@@ -88,7 +109,7 @@ func addConfig(filepath string) (err error) {
 	} else {
 		log.WithFields(log.Fields{
 			"file": filepath,
-		}).Debug("Added config")
+		}).Trace("Added config")
 	}
 	return err
 }
