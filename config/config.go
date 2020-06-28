@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/seanarwa/ds/logging"
+	"github.com/seanarwa/common/logging"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
